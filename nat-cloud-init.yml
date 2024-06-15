@@ -1,0 +1,14 @@
+#cloud-config
+packages:
+  - ifupdown
+package_update: true
+package_upgrade: true
+runcmd:
+  - |
+    cat <<EOL >> /etc/network/interfaces
+    auto eth0
+    iface eth0 inet dhcp
+        post-up echo 1 > /proc/sys/net/ipv4/ip_forward
+        post-up iptables -t nat -A POSTROUTING -s '10.0.0.0/16' -o eth0 -j MASQUERADE
+    EOL
+  - reboot

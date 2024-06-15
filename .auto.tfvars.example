@@ -1,0 +1,3 @@
+hcloud_token       = "MyHetznerCloudToken"
+public_ssh_key     = "ssh-ed25519 ExamplePublicKey"
+public_ssh_key_name = "default-key"

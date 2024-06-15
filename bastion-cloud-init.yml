@@ -1,0 +1,17 @@
+#cloud-config
+write_files:
+  - path: /root/.ssh/hetzner
+    permissions: "0600"
+    content: |
+      -----BEGIN OPENSSH PRIVATE KEY-----
+      YourPrivateKeyHere
+      -----END OPENSSH PRIVATE KEY-----
+  - path: /root/.ssh/config
+    permissions: "0644"
+    content: |
+      Host *
+          IdentityFile /root/.ssh/hetzner
+          IdentitiesOnly yes
+
+runcmd:
+  - chmod 600 /root/.ssh/hetzner

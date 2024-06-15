@@ -1,0 +1,15 @@
+#cloud-config
+write_files:
+  - path: /etc/systemd/network/10-enp7s0.network
+    permissions: "0644"
+    content: |
+        [Match]
+        Name=enp7s0
+        
+        [Network]
+        DHCP=yes
+        Gateway=10.0.0.1
+runcmd:
+  - |
+    echo "DNS=8.8.8.8 8.8.4.4" >> /etc/systemd/resolved.conf
+  - reboot
